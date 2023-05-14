@@ -2,13 +2,15 @@ package com.example.springPart.board.service;
 
 import com.example.springPart.board.controller.form.WriteBoardRequestForm;
 import com.example.springPart.board.entity.Board;
-import com.example.springPart.board.entity.Content;
 import com.example.springPart.board.repository.BoardRepository;
 import com.example.springPart.board.repository.ContentRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
@@ -21,5 +23,16 @@ public class BoardServiceImpl implements BoardService{
 
         contentRepository.save(board.getContent());
         return boardRepository.save(board);
+    }
+
+    @Override
+    public void delete(Long boardId) {
+        Optional<Board> maybeBoard = boardRepository.findById(boardId);
+        if(maybeBoard.isEmpty()) {
+            log.info("존재하지 않는 게시물 입니다.");
+            return;
+        }
+        boardRepository.delete(boardId);
+        return;
     }
 }
