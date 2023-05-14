@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+
 @Entity
 @NoArgsConstructor
 public class Member {
@@ -22,4 +23,5 @@ public class Member {
         this.email = email;
         this.password = password;
     }
+
 }
