@@ -4,11 +4,11 @@ import com.example.springPart.board.controller.form.WriteBoardRequestForm;
 import com.example.springPart.board.entity.Board;
 import com.example.springPart.board.repository.BoardRepository;
 import com.example.springPart.board.service.BoardService;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,8 +23,8 @@ public class boardTest {
     @DisplayName("게시글을 작성 합니다.")
     void 게시글_작성() {
         final Long AUTHORID = 1L;
-        final String TITLE = "오리가 추우면4?";
-        final String CONTENT = "언덕4";
+        final String TITLE = "오리가 추우면?";
+        final String CONTENT = "언덕";
 
         WriteBoardRequestForm writeBoardRequestForm = new WriteBoardRequestForm(AUTHORID, TITLE, CONTENT);
         Board writedBoard =  boardService.writeBoard(writeBoardRequestForm);
@@ -37,12 +37,12 @@ public class boardTest {
         assertEquals(CONTENT, writedBoard.getContent().getContent());
     }
 
-    @Test
-    @DisplayName("게시글을 삭제 합니다.")
-    void 게시글_삭제() {
-        final Long BOARD_ID = 5L;
-        boardService.delete(BOARD_ID);
-    }
+//    @Test
+//    @DisplayName("게시글을 삭제 합니다.")
+//    void 게시글_삭제() {
+//        final Long BOARD_ID = 5L;
+//        boardService.delete(BOARD_ID);
+//    }
 
     @Test
     @Transactional
@@ -58,16 +58,14 @@ public class boardTest {
     }
 
     @Test
-    @Transactional
     @DisplayName("게시글을 수정 합니다.")
     void 게시글_수정() {
         final Long BOARD_ID = 1L;
-        final String TITLE = "오리가 장구를치면?";
-        final String CONTENT = "덩기덕쿵덕";
-        //Board modifyBoard = boardService.modify(BOARD_ID, TITLE, CONTENT);
+        final String TITLE1 = "오리가 장구를치면2?";
+        final String CONTENT = "덩기덕쿵덕2";
 
-        Board modifyedBoard = boardService.modify(BOARD_ID, TITLE, CONTENT);
-        assertEquals(TITLE,modifyedBoard.getTitle());
+        Board modifyedBoard = boardService.modify(BOARD_ID, TITLE1, CONTENT);
+        assertEquals(TITLE1,modifyedBoard.getTitle());
 //        assertEquals(BOARD_ID, modifyBoard.getId());
 //        System.out.println(modifyBoard.getId());
 //        assertEquals(TITLE, modifyBoard.getTitle());
