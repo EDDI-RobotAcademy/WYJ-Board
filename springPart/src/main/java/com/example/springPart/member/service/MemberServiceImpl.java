@@ -47,4 +47,14 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.save(requestForm.toMember());
 
     }
+
+    @Override
+    public void delete(MemberLoginRequestForm requestForm) {
+        Optional<Member> isMember= memberRepository.findByEmail(requestForm.getEmail());
+        if(isMember.isEmpty()){
+            log.debug("이미 삭제된 회원입니다");
+        }
+        Member member = isMember.get();
+        memberRepository.delete(member);
+    }
 }
