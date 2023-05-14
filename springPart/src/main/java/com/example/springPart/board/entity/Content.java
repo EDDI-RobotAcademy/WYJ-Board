@@ -1,4 +1,4 @@
-package com.example.springPart.member.entity;
+package com.example.springPart.board.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,19 +9,14 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class Member {
+public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Getter
-    private String email;
-    @Getter
-    private String password;
+    private String content;
 
-    public Member(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public Content(String content) {
+        this.content = content;
     }
-
 }
