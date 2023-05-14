@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <v-container>
+      <p>hello vue</p>
+  </v-container>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
 
   export default {
     name: 'Home',
 
     components: {
-      HelloWorld,
     },
   }
 </script>
