@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class boardTest {
@@ -21,9 +22,9 @@ public class boardTest {
     @Test
     @DisplayName("게시글을 작성 합니다.")
     void 게시글_작성() {
-        final Long AUTHORID = 0L;
-        final String TITLE = "오리가 추우면?";
-        final String CONTENT = "언덕";
+        final Long AUTHORID = 1L;
+        final String TITLE = "오리가 추우면??";
+        final String CONTENT = "언덕??";
 
         WriteBoardRequestForm writeBoardRequestForm = new WriteBoardRequestForm(AUTHORID, TITLE, CONTENT);
         Board writedBoard =  boardService.writeBoard(writeBoardRequestForm);
@@ -39,10 +40,7 @@ public class boardTest {
     @Test
     @DisplayName("게시글을 삭제 합니다.")
     void 게시글_삭제() {
-        final Long boardId = 1L;
-
-
-
-
+        final Long boardId = 2L;
+        boardService.delete(boardId);
     }
 }
