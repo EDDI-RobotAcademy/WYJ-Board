@@ -23,8 +23,8 @@ public class boardTest {
     @DisplayName("게시글을 작성 합니다.")
     void 게시글_작성() {
         final Long AUTHORID = 1L;
-        final String TITLE = "오리가 추우면??";
-        final String CONTENT = "언덕??";
+        final String TITLE = "오리가 추우면2?";
+        final String CONTENT = "언덕2";
 
         WriteBoardRequestForm writeBoardRequestForm = new WriteBoardRequestForm(AUTHORID, TITLE, CONTENT);
         Board writedBoard =  boardService.writeBoard(writeBoardRequestForm);
@@ -40,7 +40,20 @@ public class boardTest {
     @Test
     @DisplayName("게시글을 삭제 합니다.")
     void 게시글_삭제() {
-        final Long boardId = 2L;
-        boardService.delete(boardId);
+        final Long BOARD_ID = 2L;
+        boardService.delete(BOARD_ID);
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("게시글을 조회 합니다.")
+    void 게시글_조회() {
+        final Long BOARD_ID = 1L;
+        Board readBoard = boardService.read(BOARD_ID);
+        System.out.println("Author : "+ readBoard.getAuthor());
+        System.out.println("Title : "+ readBoard.getTitle());
+        System.out.println("Content : "+ readBoard.getContent().getContent());
+
+        assertEquals(BOARD_ID, readBoard.getId());
     }
 }
