@@ -29,10 +29,10 @@ public class BoardServiceImpl implements BoardService{
     public void delete(Long boardId) {
         Optional<Board> maybeBoard = boardRepository.findById(boardId);
         if(maybeBoard.isEmpty()) {
-            log.info("존재하지 않는 게시물 입니다.");
+            log.debug("존재하지 않는 게시물 입니다.");
             return;
         }
-        boardRepository.delete(boardId);
-        return;
+        Board board = maybeBoard.get();
+        boardRepository.delete(board);
     }
 }
