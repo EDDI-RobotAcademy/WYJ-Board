@@ -7,6 +7,7 @@ import com.example.springPart.board.repository.ContentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 import java.util.Optional;
 
@@ -44,5 +45,21 @@ public class BoardServiceImpl implements BoardService{
             return null;
         }
         return maybeBoard.get();
+    }
+
+    @Override
+    public Board modify(Long boardId, String title, String content) {
+        Optional<Board> maybeBoard = boardRepository.findById(boardId);
+        if(maybeBoard.isEmpty()) {
+            log.debug("존재하지 않는 게시물 입니다.");
+            return null;
+        }
+        Board board = maybeBoard.get();
+        board.setTitle(title);
+        log.info(String.valueOf(board));
+//        board.getContent().setContent(content);
+//        contentRepository.save(board.getContent());
+        return boardRepository.save(board);
+        //return null;
     }
 }

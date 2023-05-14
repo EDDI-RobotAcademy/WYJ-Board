@@ -8,4 +8,6 @@ public interface BoardService {
     public void delete(Long boardId);
 
     public Board read(Long boardId);
+
+    Board modify(Long boardId, String title, String content);
 }
