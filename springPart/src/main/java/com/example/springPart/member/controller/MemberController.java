@@ -24,4 +24,8 @@ public class MemberController {
                 memberService.login(loginRequestForm);
         return memberLoginResponseForm;
     }
+    @PostMapping("/delete-member")
+    public void deleteMember(@RequestBody MemberLoginRequestForm loginRequestForm){
+        memberService.delete(loginRequestForm);
+    }
 }
