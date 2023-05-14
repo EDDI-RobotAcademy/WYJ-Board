@@ -4,6 +4,8 @@ import com.example.springPart.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@ToString
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +25,7 @@ public class Board {
     //private Member author;
     //TODO: MEMBER 엔티티 구현후 Member author로 바인딩
 
-
+    @Setter
     @Getter
     private String title;
     @OneToOne(fetch = FetchType.LAZY)
