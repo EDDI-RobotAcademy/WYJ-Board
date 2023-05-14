@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class boardTest {
     @Autowired
+
     BoardService boardService;
 
     @Test
@@ -33,5 +34,15 @@ public class boardTest {
         assertEquals(TITLE, writedBoard.getTitle());
         System.out.println(writedBoard.getTitle());
         assertEquals(CONTENT, writedBoard.getContent().getContent());
+    }
+
+    @Test
+    @DisplayName("게시글을 삭제 합니다.")
+    void 게시글_삭제() {
+        final Long boardId = 1L;
+
+
+
+
     }
 }

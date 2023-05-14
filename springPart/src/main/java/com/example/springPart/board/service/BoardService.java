@@ -5,4 +5,5 @@ import com.example.springPart.board.entity.Board;
 
 public interface BoardService {
     public Board writeBoard(WriteBoardRequestForm requestForm);
+    public void delete(Long boardId);
 }
