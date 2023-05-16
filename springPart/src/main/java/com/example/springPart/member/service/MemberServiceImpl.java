@@ -1,10 +1,14 @@
 package com.example.springPart.member.service;
 
 import com.example.springPart.member.entity.Member;
+import com.example.springPart.member.entity.MemberRole;
+import com.example.springPart.member.entity.Role;
 import com.example.springPart.member.form.MemberLoginRequestForm;
 import com.example.springPart.member.form.MemberLoginResponseForm;
 import com.example.springPart.member.controller.form.MemberRequestForm;
 import com.example.springPart.member.repository.MemberRepository;
+import com.example.springPart.member.repository.MemberRoleRepository;
+import com.example.springPart.member.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,9 +19,10 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-
 public class MemberServiceImpl implements MemberService{
     final private MemberRepository memberRepository;
+    final private MemberRoleRepository memberRoleRepository;
+    final private RoleRepository roleRepository;
 
     @Override
     public MemberLoginResponseForm login(MemberLoginRequestForm requestForm) {
@@ -43,9 +48,12 @@ public class MemberServiceImpl implements MemberService{
             log.debug("이미 등록된 회원이라 가입할 수 없습니다.");
             return null;
         }
-
-        return memberRepository.save(requestForm.toMember());
-
+        final Member member = requestForm.toMember();
+        memberRepository.save(member);
+        final Role role = roleRepository.findByRoleType(requestForm.getRoleType()).get();
+        final MemberRole memberRole = new MemberRole(member, role);
+        memberRoleRepository.save(memberRole);
+        return member;
     }
 
     @Override

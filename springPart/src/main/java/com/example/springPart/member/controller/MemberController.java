@@ -1,22 +1,21 @@
 package com.example.springPart.member.controller;
 
 
+import com.example.springPart.member.controller.form.MemberRequestForm;
+import com.example.springPart.member.entity.Member;
 import com.example.springPart.member.form.MemberLoginRequestForm;
 import com.example.springPart.member.form.MemberLoginResponseForm;
 import com.example.springPart.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    private MemberService memberService;
+    final private MemberService memberService;
 
     @PostMapping("/login")
     public MemberLoginResponseForm isLogin(@RequestBody MemberLoginRequestForm loginRequestForm){
@@ -24,8 +23,19 @@ public class MemberController {
                 memberService.login(loginRequestForm);
         return memberLoginResponseForm;
     }
-    @PostMapping("/delete-member")
+    @DeleteMapping("/member")
     public void deleteMember(@RequestBody MemberLoginRequestForm loginRequestForm){
         memberService.delete(loginRequestForm);
     }
+
+    @PostMapping("/signUp")
+    public Long signUp(@RequestBody MemberRequestForm memberRequestForm) {
+        System.out.println(memberRequestForm);
+        Member registerdMember = memberService.register(memberRequestForm);
+        if(registerdMember==null) {
+            return -1L;
+        }
+        return registerdMember.getId();
+    }
+
 }
