@@ -6,17 +6,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
     final private BoardService boardService;
     @PostMapping("/write-board")
-    public Long writeBoard(WriteBoardRequestForm requestForm) {
-        log.info("writeBoard()");
+    public Long writeBoard(@RequestBody WriteBoardRequestForm requestForm) {
+        log.info("writeBoard()"+ requestForm);
         Long boardId = boardService.writeBoard(requestForm).getId();
         return boardId;
     }
