@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    private MemberService memberService;
+    final private MemberService memberService;
 
     @PostMapping("/login")
     public MemberLoginResponseForm isLogin(@RequestBody MemberLoginRequestForm loginRequestForm){
@@ -30,6 +30,7 @@ public class MemberController {
 
     @PostMapping("/signUp")
     public Long signUp(@RequestBody MemberRequestForm memberRequestForm) {
+        System.out.println(memberRequestForm);
         Member registerdMember = memberService.register(memberRequestForm);
         if(registerdMember==null) {
             return -1L;

@@ -19,7 +19,6 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-
 public class MemberServiceImpl implements MemberService{
     final private MemberRepository memberRepository;
     final private MemberRoleRepository memberRoleRepository;
